@@ -7,7 +7,7 @@ class CreatePosts < ActiveRecord::Migration[6.1]
       t.integer :number
       t.string :URL
       t.text :message
-
+      t.integer :user_id
       t.timestamps
     end
   end

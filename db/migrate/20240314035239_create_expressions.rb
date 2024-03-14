@@ -5,6 +5,7 @@ class CreateExpressions < ActiveRecord::Migration[6.1]
       t.text :content
       t.text :message
       t.integer :post_id
+      t.integer :user_id
 
       t.timestamps
     end

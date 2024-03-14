@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 2024_03_14_035239) do
     t.text "content"
     t.text "message"
     t.integer "post_id"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -56,6 +57,7 @@ ActiveRecord::Schema.define(version: 2024_03_14_035239) do
     t.integer "number"
     t.string "URL"
     t.text "message"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
