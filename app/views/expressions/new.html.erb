@@ -1,2 +1,13 @@
-<h1>Expressions#new</h1>
-<p>Find me in app/views/expressions/new.html.erb</p>
+<%= form_with model: [@post,@exp], url: post_expressions_path(@post) do |f| %>
+
+    <h4>title</h4>
+    <%= f.text_field :title %>
+
+    <h4>実際にしたこと</h4>
+    <%= f.text_area :content%>
+    
+    <h4>次の参加者へのメッセージ</h4>
+    <%= f.text_area :message%>
+    
+    <%= f.submit '登録', class: "btn btn-success btn-block" %>
+  <% end %>

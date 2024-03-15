@@ -1,2 +1,7 @@
-<h1>Expressions#show</h1>
-<p>Find me in app/views/expressions/show.html.erb</p>
+
+<h1><%= @exp.title %></h1>
+<h1><%= @exp.content %></h1>
+<h1><%= @exp.message %></h1>
+<%= link_to "削除", post_expression_path(@exp.post, @exp), method: :delete, "data-confirm" => "削除しても大丈夫ですか？" %>
+
+

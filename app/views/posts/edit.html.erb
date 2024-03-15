@@ -1,8 +1,5 @@
 <%= form_with model: @post do |f| %>
-  		 
-
-      <%= f.text_field :title ,autofocus: true,class:"form-control btn-block" %>
-      <%= f.text_area :datetime  ,class:"form-control btn-block" %>
-      <%= f.submit "編集" ,class:"btn bg-success text-light" %>
-      
+  <%= f.text_field :title ,autofocus: true,class:"form-control btn-block" %>
+  <%= f.text_area :datetime  ,class:"form-control btn-block" %>
+  <%= f.submit "編集" ,class:"btn bg-success text-light" %>
 <% end %>

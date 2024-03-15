@@ -1,2 +1,9 @@
+
+
 <h1><%= @post.title %></h1>
 <h1><%= @post.datetime %></h1>
+<% @post.expressions.each do |expression| %>
+ <%= expression.title %>
+ <%= expression.content %>
+<% end %>
+
