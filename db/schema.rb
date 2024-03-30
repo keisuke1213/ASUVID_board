@@ -52,11 +52,13 @@ ActiveRecord::Schema.define(version: 2024_03_14_035239) do
 
   create_table "posts", force: :cascade do |t|
     t.string "title"
-    t.datetime "datetime"
-    t.datetime "deadline"
+    t.string "date"
+    t.datetime "start_time"
+    t.date "deadline"
     t.integer "number"
     t.string "URL"
     t.text "message"
+    t.text "content"
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

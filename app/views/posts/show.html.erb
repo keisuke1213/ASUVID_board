@@ -1,9 +1,37 @@
-
-
-<h1><%= @post.title %></h1>
-<h1><%= @post.datetime %></h1>
-<% @post.expressions.each do |expression| %>
- <%= expression.title %>
- <%= expression.content %>
-<% end %>
+<div class="container ps-5">
+ <div class="row justify-content-center mt-5">
+   <div class="col-lg-4 text-center">
+    <h1 class="pb-3 display-6"><%= @post.title %></h1>
+    <%= image_tag @post.get_image(300,250)%>
+   </div>
+   <div class="col-lg-5 mt-3">
+           <div class="d-flex mb-3 example-class">
+         <h5 class="">日時</h5>
+         <h5 class="mx-3"><%= l @post.start_time %><h5>
+       </div>
+       <div class="d-flex mb-1">
+         <h5 class="">募集期限</h5>
+         <h5 class="mx-3"><%= l @post.deadline, format: :short %></h5>
+       </div>
+          <h5 class="pt-4 pb-3">活動内容</h5>
+           <p class=""><%= @post.content %></p>
+           <div class="d-flex pt-3">
+             <h5>募集人数:</h5>
+             <h5 class="mx-3"><%= @post.number %>人程度</h5>
+           </div>
+             <h5 class="pt-4">応募はこちらから</h5>
+             <%= link_to @post.URL,  @post.URL, class: "text-break" %>
+           </div>
+   </div>
+    
+  <%= link_to "削除", post_path(@post.id), method: :delete, "data-confirm" => "削除しても大丈夫ですか？" %>
+  </div>
+  
+ 
+  <% @post.expressions.each do |expression| %>
+   <%= expression.title %>
+   <%= expression.content %>
+  <% end %>
+  </div>
+</div>
 

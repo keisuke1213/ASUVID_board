@@ -1,0 +1,13 @@
+<div class="col-7 mx-3 mt-3">
+     <%= month_calendar(events: @posts) do |date, posts| %>
+        <%= date.day %>
+        <% posts.each do |post| %>
+        <div>
+          <p class="bg-danger text-white "><%= post.title %></p>
+          <p class="bg-danger text-white "><%= l post.deadline, format: :short %></p>
+          
+        </div>
+      <% end %>
+     <% end %>
+</div>
+

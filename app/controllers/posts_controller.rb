@@ -1,17 +1,19 @@
 class PostsController < ApplicationController
   def new
-    @post = Post.new
+    @new_post = Post.new
+    @posts = Post.all
   end
   
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     @post.save
-    redirect_to post_path(@post.id)
+    redirect_to posts_path
   end
 
   def index
     @posts = Post.all
+    @posts = Post.all.order(created_at: :desc)
   end
 
   def show
@@ -39,7 +41,7 @@ class PostsController < ApplicationController
    private
   
   def post_params
-    params.require(:post).permit(:title, :datetime)
+    params.require(:post).permit(:title, :date, :image,:content,:deadline,:number,:URL,:start_time)
   end
   
 end
