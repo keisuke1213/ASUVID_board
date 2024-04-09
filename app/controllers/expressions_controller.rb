@@ -1,18 +1,20 @@
 class ExpressionsController < ApplicationController
   def new
-    @post = Post.find(params[:post_id])
     @exp = Expression.new
   end
 
  def create
-   @post = Post.find(params[:post_id])
    @exp = current_user.expressions.new(expression_params)
-   @exp.post_id = @post.id
    @exp.save
-   redirect_to post_path(@post)
+   redirect_to expressions_path
  end
   def index
-    @post = Post.find(params[:post_id])
+    if params[:search]
+      @exps = Expression.where("title LIKE ? ", "%#{params[:search]}%")
+    else
+    @exps = Expression.all.order(created_at: :desc)
+    @user = current_user
+    end
   end
 
   def show
@@ -33,7 +35,7 @@ class ExpressionsController < ApplicationController
   def destroy
     exp =  Expression.find(params[:id])
     exp.destroy
-    redirect_to post_expressions_path
+    redirect_to expressions_path
   end
   
   private 

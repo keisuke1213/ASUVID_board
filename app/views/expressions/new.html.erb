@@ -1,13 +1,11 @@
-<%= form_with model: [@post,@exp], url: post_expressions_path(@post) do |f| %>
+<%= form_with model: @exp do |f| %>
 
-    <h4>title</h4>
+    <h4>活動名</h4>
     <%= f.text_field :title %>
 
-    <h4>実際にしたこと</h4>
+    <h4>体験記</h4>
     <%= f.text_area :content%>
     
-    <h4>次の参加者へのメッセージ</h4>
-    <%= f.text_area :message%>
     
-    <%= f.submit '登録', class: "btn btn-success btn-block" %>
+    <%= f.submit '登録' %>
   <% end %>

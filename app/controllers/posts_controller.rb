@@ -12,8 +12,12 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all
-    @posts = Post.all.order(created_at: :desc)
+    if params[:search]
+      @posts = Post.where("title LIKE ? OR type LIKE?", "%#{params[:search]}%", "%#{params[:search]}%")
+    else
+      @posts = Post.all
+      @posts = Post.all.order(created_at: :desc)
+    end
   end
 
   def show
@@ -41,7 +45,8 @@ class PostsController < ApplicationController
    private
   
   def post_params
-    params.require(:post).permit(:title, :date, :image,:content,:deadline,:number,:URL,:start_time)
+    params.require(:post).permit(:type, :title, :date, :image,:content,:deadline,:number,:URL,:start_time)
+    
   end
   
 end

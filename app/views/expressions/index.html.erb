@@ -1,6 +1,19 @@
-<% @post.expressions.each do |exp| %>
-
-<h1><%= exp.title %></h1>
-<h1><%= exp.content %></h1>
-<h1><%= exp.message %></h1>
+<%= form_tag(expressions_path, method: "get") do %>
+  <%= text_field_tag :search, params[:search], placeholder: "キーワードを入力" %>
+  <%= submit_tag "検索" %>
 <% end %>
+
+  <div class="row mt-3">
+    <div class="col-md-6 mx-auto">
+      <% @exps.each do |exp| %>
+       <section class="bg-white rounded my-5 mx-auto pt-4 pb-4 px-4">
+           <h4 class="mb-3"><%= exp.title %></h4>
+           <p class=""><%= exp.content %></p>
+           <p><%= @user.email %></p>
+       </section>
+       <%= link_to "削除", expression_path(exp), method: :delete, "data-confirm" => "削除しても大丈夫ですか？" %>
+     <% end %>
+    </div>
+  </div>
+</div>
+<%= javascript_pack_tag 'link' %>

@@ -1,6 +1,8 @@
 class Post < ApplicationRecord
   belongs_to :user
-  has_many :expressions, dependent: :destroy
+  self.inheritance_column = :_type_disabled
+  enum type: { volunteer: 'ボランティア', event: 'イベント', announcement: 'お知らせ' }
+
   
   has_one_attached :image
   

@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 2024_03_14_035239) do
   end
 
   create_table "posts", force: :cascade do |t|
+    t.string "type"
     t.string "title"
     t.string "date"
     t.datetime "start_time"

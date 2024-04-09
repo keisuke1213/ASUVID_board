@@ -1,8 +1,19 @@
 <div class="container mt-3 mb-3">
+    <%= form_tag(posts_path, method: "get") do %>
+  <%= text_field_tag :search, params[:search], id: "search-box", placeholder: "キーワードを入力" %>
+  <%= submit_tag "検索" %>
+<% end %>
+<div class="">
+<%= link_to "ボランティア", "#",class: "search-link btn btn-success mb-2" %>
+<%= link_to "イベント", "#",class: "search-link btn btn-danger mb-2" %>
+<%= link_to "お知らせ", "#",class: "search-link btn btn-info mb-2" %>
+<%= link_to "清掃", "#",class: "search-link btn btn-warning mb-2" %>
+</div>
+
   <div class="row mt-3">
     <div class="col-md-8 mx-auto">
       <% @posts.each do |post| %>
-       <section class="bg-white my-5 mx-auto pt-4 pb-4 px-4 d-flex">
+       <section class="bg-white rounded my-5 mx-auto pt-4 pb-4 px-4 d-flex">
          <div class="mx-3">
            <h4 class="mb-3 text-center"><%= post.title %></h4>
            <%= image_tag post.get_image(250,200) %>
@@ -19,9 +30,11 @@
             <h5 class="mt-4 text-center">活動内容</h5>
             <h5 class="px-3 mt-4"><%= post.content %></h5>
             <p class="text-right"><%= link_to "詳細", post_path(post.id) %></p>
+            <p class="text-right"><%= link_to "削除", post_path(post), method: :delete, "data-confirm" => "削除しても大丈夫ですか？" %></p>
          </div>
        </section>
-     <% end %>
+       <% end %>
     </div>
   </div>
 </div>
+<%= javascript_pack_tag 'link' %>

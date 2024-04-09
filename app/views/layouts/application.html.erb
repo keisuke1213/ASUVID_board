@@ -28,13 +28,15 @@
         <li class="nav-item px-4">
           <%= link_to "掲示板投稿", new_post_path, class:"nav-link text-white" %>
         </li>
+        <li class="nav-item px-4">
+          <%= link_to "体験記", expressions_path, class:"nav-link text-white" %>
+        </li>
+        <li class="nav-item px-4">
+          <%= link_to "体験記投稿", new_expression_path, class:"nav-link text-white" %>
+        </li>
         
         
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-secondary text-white" type="submit">Search</button>
-      </form>
     </div>
   </div>
 </nav>
