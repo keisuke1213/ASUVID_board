@@ -1,11 +1,11 @@
 <div class="container ps-5">
  <div class="row justify-content-center mt-5">
    <div class="col-lg-4 text-center bg-white">
-    <h2 class="pb-3"><%= @post.title %></h1>
+    <h2 class="pb-3 pt-3"><%= @post.title %></h1>
     <%= image_tag @post.get_image(350,250)%>
    </div>
-   <div class="col-lg-5 mt-3 bg-white">
-           <div class="d-flex mb-3 justify-content-center">
+   <div class="col-lg-5 bg-white pt-3 pb-3">
+       <div class="d-flex mb-3 justify-content-center">
          <h5 class="test">日時</h5>
          <h5 class="mx-3"><%= l @post.start_time %><h5>
        </div>
@@ -14,14 +14,13 @@
          <h5 class="mx-3"><%= l @post.deadline, format: :short %></h5>
        </div>
           <h5 class="pt-4 pb-3 text-center">活動内容</h5>
-           <p class="mx-auto" style="width: 70%"><%= @post.content %></p>
-           <div class="d-flex pt-3 justify-content-center">
-             <h5>募集人数:</h5>
-             <h5 class="mx-3 text-center"><%= @post.number %>人程度</h5>
-           </div>
-             <h5 class="pt-4 text-center">応募はこちらから</h5>
-             <%= link_to @post.URL,  @post.URL, class: "text-break" %>
-           </div>
+          <p class="mx-auto" style="width: 70%"><%= @post.content %></p>
+       <div class="d-flex pt-3 justify-content-center">
+          <h5>募集人数:</h5>
+          <h5 class="mx-3 text-center"><%= @post.number %>人程度</h5>
+       </div>
+          <h5 class="pt-4 text-center">応募はこちらから</h5>
+          <%= link_to @post.URL,  @post.URL, class: "text-break" %>
    </div>
     
   <%= link_to "削除", post_path(@post.id), method: :delete, "data-confirm" => "削除しても大丈夫ですか？" %>

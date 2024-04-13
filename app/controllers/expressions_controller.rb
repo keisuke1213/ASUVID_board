@@ -10,15 +10,15 @@ class ExpressionsController < ApplicationController
  end
   def index
     if params[:search]
-      @exps = Expression.where("title LIKE ? ", "%#{params[:search]}%")
+      @exps = Expression.joins(:user).where("expressions.title LIKE ? OR users.name LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
     else
     @exps = Expression.all.order(created_at: :desc)
-    @user = current_user
     end
   end
 
   def show
     @exp = Expression.find(params[:id])
+    @user = @exp.user
   end
 
   def edit
@@ -41,7 +41,7 @@ class ExpressionsController < ApplicationController
   private 
   
   def expression_params
-    params.require(:expression).permit(:title, :content, :message)
+    params.require(:expression).permit(:title, :content, :message, :exp_image)
   end
   
 end

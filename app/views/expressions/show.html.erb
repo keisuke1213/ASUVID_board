@@ -1,7 +1,15 @@
-
-<h1><%= @exp.title %></h1>
-<h1><%= @exp.content %></h1>
-<h1><%= @exp.message %></h1>
-<%= link_to "削除", expression_path(@exp), method: :delete, "data-confirm" => "削除しても大丈夫ですか？" %>
+<div class="container">
+    <div class="row mt-5 justify-content-center">
+        <div class="col-md-4 text-center">
+            <%= image_tag @exp.get_exp_image(250,200) %>
+        </div>
+        <div class="col-lg-6 pt-5">
+            <h1><%= @exp.title %></h1>
+            <p><%= @user.name %></p>
+        </div>
+        <p class="mt-5" style="width: 55%;"><%= @exp.content %></p>
+        <%= link_to "削除", expression_path(@exp), method: :delete, "data-confirm" => "削除しても大丈夫ですか？" %>
+    </div>
+</div>
 
 

@@ -5,6 +5,11 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :expressions, dependent: :destroy
   
+  validates :name, presence: true, length: { minimum: 2 }
+  
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+         
+  
+  
 end

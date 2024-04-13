@@ -1,15 +1,12 @@
 Rails.application.routes.draw do
+  get '/search' => 'searches#search'
   get 'carenders/top'
   get 'homes/top'
   devise_scope :user do
     root :to => "devise/sessions#new"
   end
   devise_for :users
-  resources :posts do
-     collection do
-      get 'search'
-    end
-  end
+  resources :posts 
   resources :expressions
 end
 
