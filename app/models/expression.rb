@@ -3,6 +3,10 @@ class Expression < ApplicationRecord
   
   has_one_attached :exp_image
   
+  validates :title, presence: true
+  validates :content, presence: true, length: {minimum: 50}
+  
+  
   def get_exp_image(width, height)
     unless exp_image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')

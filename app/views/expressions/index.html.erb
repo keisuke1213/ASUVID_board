@@ -1,23 +1,26 @@
 
   
   <div class="container">
+    <div class="text-center mt-3">
     <%= form_tag(expressions_path, method: "get") do %>
     <%= text_field_tag :search, params[:search], placeholder: "キーワードを入力" %>
     <%= submit_tag "検索" %>
+    </div>
 <% end %>
   <% @exps.each do |exp| %>
+  <%= link_to expression_path(exp.id) do %>
   <div class="row mt-3 justify-content-center">
     <div class="col-md-2 bg-white pt-4 text-center">
         <%= image_tag exp.get_exp_image(150,100) %>
     </div>
     <div class="col-md-4 ps-0 bg-white px-0">
            <h4 class="mb-3 pt-3"><%= exp.title %></h4>
-           <p class=""><%= exp.content.truncate(35) %></p>
-           <p><%= exp.user.name %></p>
+           <p class="text-body"><%= exp.content.truncate(35) %></p>
+           <p style="color: #DAA520;"><%= exp.user.name %></p>
     </div>
-    <%= link_to "詳細",expression_path(exp.id) %>
   </div>
   <%= link_to "削除", expression_path(exp), method: :delete, "data-confirm" => "削除しても大丈夫ですか？" %>
+  <% end %>
   <% end %>
 </div>
 </div>

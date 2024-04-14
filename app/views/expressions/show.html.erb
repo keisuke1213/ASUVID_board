@@ -1,15 +1,17 @@
 <div class="container">
     <div class="row mt-5 justify-content-center">
-        <div class="col-md-4 text-center">
+        <div class="col-lg-4 text-center">
             <%= image_tag @exp.get_exp_image(250,200) %>
         </div>
-        <div class="col-lg-6 pt-5">
-            <h1><%= @exp.title %></h1>
-            <p><%= @user.name %></p>
+        <div class="col-lg-3 pt-5 " style="width: 70%;">
+            <h2 class="exp-title-name"><%= @exp.title %></h2>
+            <p class="exp-title-name  mt-2"><%= @user.name %></p>
         </div>
-        <p class="mt-5" style="width: 55%;"><%= @exp.content %></p>
-        <%= link_to "削除", expression_path(@exp), method: :delete, "data-confirm" => "削除しても大丈夫ですか？" %>
     </div>
+    
+    <p class="mt-5 mx-auto exp-content" style="width: 50%;"><%= @exp.content %></p>
+    <%= link_to "編集" ,edit_expression_path(@exp),class: "btn btn-success mt-3 text-center" %>
+    <%= link_to "削除", expression_path(@exp), method: :delete, "data-confirm" => "削除しても大丈夫ですか？", class: "btn btn-success mt-3 text-center" %>
 </div>
 
 

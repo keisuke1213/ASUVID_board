@@ -1,4 +1,6 @@
 class ExpressionsController < ApplicationController
+  before_action :is_matching_login_user, only: [:edit, :update,:destroy]
+  
   def new
     @exp = Expression.new
   end
@@ -22,17 +24,20 @@ class ExpressionsController < ApplicationController
   end
 
   def edit
+    is_matching_login_user
     @exp = Expression.find(params[:id])
+    
   end
   
   def update
-    @post = Post.find(params[:post_id])
+    is_matching_login_user
     @exp = Expression.find(params[:id])
     @exp.update(expression_params)
-    redirect_to post_path(@post.id)
+    redirect_to expressions_path
   end
   
   def destroy
+    is_matching_login_user
     exp =  Expression.find(params[:id])
     exp.destroy
     redirect_to expressions_path
@@ -43,5 +48,14 @@ class ExpressionsController < ApplicationController
   def expression_params
     params.require(:expression).permit(:title, :content, :message, :exp_image)
   end
+  
+  def is_matching_login_user
+    @exp = Expression.find(params[:id])
+    user = @exp.user
+    unless user.id == current_user.id
+      redirect_to expression_path(@exp.id)
+    end
+  end
+  
   
 end

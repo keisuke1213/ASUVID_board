@@ -3,6 +3,11 @@ class Post < ApplicationRecord
   self.inheritance_column = :_type_disabled
   enum type: { volunteer: 'ボランティア', event: 'イベント', announcement: 'お知らせ' }
 
+  before_validation :clear_start_time_if_date_undecided
+  validates :title, presence: true
+  validates :content, presence: true, length: {minimum: 40}
+  validates :title, presence: true
+
   
   has_one_attached :image
   
@@ -14,5 +19,10 @@ class Post < ApplicationRecord
     image.variant(resize_to_limit: [width, height]).processed
   end
   
+  private
+
+  def clear_start_time_if_date_undecided
+    self.start_time = nil unless date_decided
+  end
     
 end

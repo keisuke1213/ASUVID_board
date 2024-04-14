@@ -1,26 +1,34 @@
 <div class="container ps-5">
  <div class="row justify-content-center mt-5">
    <div class="col-lg-4 text-center bg-white">
-    <h2 class="pb-3 pt-3"><%= @post.title %></h1>
+    <h3 class="pb-3 pt-3"><%= @post.title %></h3>
     <%= image_tag @post.get_image(350,250)%>
+    <%= link_to "編集", edit_post_path, class: "btn btn-success mt-3" %>
    </div>
    <div class="col-lg-5 bg-white pt-3 pb-3">
-       <div class="d-flex mb-3 justify-content-center">
-         <h5 class="test">日時</h5>
-         <h5 class="mx-3"><%= l @post.start_time %><h5>
-       </div>
+        <div class="d-flex mb-3 justify-content-center">
+          <h6 class="test">日時</h6>
+          <h6 class="mx-3"><p><%= @post.date_decided ? l(@post.start_time) : @post.approximate_date %></p><h6>
+        </div>
        <div class="d-flex mb-1 justify-content-center">
-         <h5 class="">募集期限</h5>
-         <h5 class="mx-3"><%= l @post.deadline, format: :short %></h5>
+         <h6 class="">募集期限</h6>
+         <h6 class="mx-3"><%= l @post.deadline, format: :short %></h6>
        </div>
-          <h5 class="pt-4 pb-3 text-center">活動内容</h5>
-          <p class="mx-auto" style="width: 70%"><%= @post.content %></p>
+          <h5 class="pt-3 pb-3 text-center">活動場所</h5>
+          <p class="text-center"><%= @post.place %></p>
+          <h5 class="pt-3 pb-3 text-center">活動内容</h5>
+          <p class="mx-auto text-body" style="width: 70%"><%= @post.content %></p>
        <div class="d-flex pt-3 justify-content-center">
-          <h5>募集人数:</h5>
-          <h5 class="mx-3 text-center"><%= @post.number %>人程度</h5>
+          <h6>募集人数:</h6>
+          <h6 class="mx-3 text-center"><%= @post.number %>人程度</h6>
        </div>
+       <div class="d-flex pt-3 justify-content-center">
+          <h6>持ち物:</h6>
+          <p class="mx-3 text-center"><%= @post.belongings %></hp>
+       </div>
+       
           <h5 class="pt-4 text-center">応募はこちらから</h5>
-          <%= link_to @post.URL,  @post.URL, class: "text-break" %>
+         <%= link_to @post.URL,  @post.URL, class: "text-break d-block mx-5 px-2"%>
    </div>
     
   <%= link_to "削除", post_path(@post.id), method: :delete, "data-confirm" => "削除しても大丈夫ですか？" %>

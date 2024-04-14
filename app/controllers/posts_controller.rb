@@ -1,4 +1,7 @@
 class PostsController < ApplicationController
+  
+  before_action :is_matching_login_user, only: [:edit, :update,:destroy]
+  
   def new
     @new_post = Post.new
     @posts = Post.all
@@ -26,16 +29,19 @@ class PostsController < ApplicationController
   end
 
   def edit
+    is_matching_login_user
    @post = Post.find(params[:id])
   end
   
   def update
+    is_matching_login_user
     @post = Post.find(params[:id])
     @post.update(post_params)
-    redirect_to posts_path
+    redirect_to post_path(@post.id)
   end
   
   def destroy
+    is_matching_login_user
    post = Post.find(params[:id])
    post.destroy
    redirect_to posts_path
@@ -45,8 +51,15 @@ class PostsController < ApplicationController
    private
   
   def post_params
-    params.require(:post).permit(:type, :title, :date, :image,:content,:deadline,:number,:URL,:start_time)
-    
+    params.require(:post).permit(:type, :title, :date, :image,:content,:deadline,:number,:URL,:start_time,:approximate_date,:date_decided ,:belongings,:place)
+  end
+  
+  def is_matching_login_user
+    @post = Post.find(params[:id])
+    user = @post.user
+    unless user.id == current_user.id
+      redirect_to post_path(@post.id)
+    end
   end
   
 end

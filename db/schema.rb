@@ -52,6 +52,10 @@ ActiveRecord::Schema.define(version: 2024_03_14_035239) do
 
   create_table "posts", force: :cascade do |t|
     t.string "type"
+    t.string "belongings"
+    t.string "place"
+    t.boolean "date_decided"
+    t.string "approximate_date"
     t.string "title"
     t.string "date"
     t.datetime "start_time"
