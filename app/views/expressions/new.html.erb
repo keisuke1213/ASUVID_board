@@ -1,8 +1,17 @@
 <div class="container">
+    <% if @exp.errors.any? %>
+      <%= @exp.errors.count %> error prohibited this book from being saved:
+      <ul>
+      <% @exp.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    <% end %>
     <div class="row justify-content-center">
         <div class="col-9">
             <h5 class="mt-4">体験記投稿フォーム</h5>
             <%= form_with model: @exp do |f| %>
+            <%= f.select :type, options_for_select({ ボランティア: 'ボランティア', イベント: 'イベント', その他: 'その他' }),class: 'form-control' %>
         　　<h6>画像を選択</h6>
             <%= f.file_field :exp_image, placeholder: "画像", accept: "image/*" %>
             

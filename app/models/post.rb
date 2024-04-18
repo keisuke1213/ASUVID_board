@@ -4,9 +4,7 @@ class Post < ApplicationRecord
   enum type: { volunteer: 'ボランティア', event: 'イベント', announcement: 'お知らせ' }
 
   before_validation :clear_start_time_if_date_undecided
-  validates :title, presence: true
-  validates :content, presence: true, length: {minimum: 40}
-  validates :title, presence: true
+  
 
   
   has_one_attached :image

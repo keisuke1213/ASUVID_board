@@ -7,14 +7,18 @@ class ExpressionsController < ApplicationController
 
  def create
    @exp = current_user.expressions.new(expression_params)
-   @exp.save
+  if  @exp.save
+    flash[:notice] = "登録に成功しました。"
    redirect_to expressions_path
+  else
+    render :new
+  end
  end
   def index
     if params[:search]
-      @exps = Expression.joins(:user).where("expressions.title LIKE ? OR users.name LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
+      @exps = Expression.joins(:user).where("expressions.title LIKE ? OR users.name LIKE ? OR expressions.type LIKE?", "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%").page(params[:page])
     else
-    @exps = Expression.all.order(created_at: :desc)
+    @exps = Expression.all.page(params[:page]).order(created_at: :desc)
     end
   end
 
@@ -32,8 +36,12 @@ class ExpressionsController < ApplicationController
   def update
     is_matching_login_user
     @exp = Expression.find(params[:id])
-    @exp.update(expression_params)
+    if @exp.update(expression_params)
+    flash[:notice] = "情報が更新されました。"
     redirect_to expressions_path
+    else
+      render :edit
+    end
   end
   
   def destroy
@@ -46,7 +54,7 @@ class ExpressionsController < ApplicationController
   private 
   
   def expression_params
-    params.require(:expression).permit(:title, :content, :message, :exp_image)
+    params.require(:expression).permit(:title, :content, :message, :exp_image,:type)
   end
   
   def is_matching_login_user

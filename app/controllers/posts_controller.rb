@@ -4,22 +4,24 @@ class PostsController < ApplicationController
   
   def new
     @new_post = Post.new
-    @posts = Post.all
   end
   
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
-    @post.save
-    redirect_to posts_path
+    if @post.save
+      flash[:notice] = "登録に成功しました。"
+      redirect_to posts_path
+    else 
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def index
     if params[:search]
-      @posts = Post.where("title LIKE ? OR type LIKE?", "%#{params[:search]}%", "%#{params[:search]}%")
+      @posts = Post.where("title LIKE ? OR type LIKE?", "%#{params[:search]}%", "%#{params[:search]}%").page(params[:page])
     else
-      @posts = Post.all
-      @posts = Post.all.order(created_at: :desc)
+      @posts = Post.all.page(params[:page]).order(created_at: :desc)
     end
   end
 
@@ -36,8 +38,12 @@ class PostsController < ApplicationController
   def update
     is_matching_login_user
     @post = Post.find(params[:id])
-    @post.update(post_params)
+    if @post.update(post_params)
+      flash[:notice] = "情報が更新されました。"
     redirect_to post_path(@post.id)
+    else
+      render :edit
+    end
   end
   
   def destroy

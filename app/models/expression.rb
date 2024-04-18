@@ -1,11 +1,16 @@
 class Expression < ApplicationRecord
   belongs_to :user
+  has_many :favorites, dependent: :destroy
   
-  has_one_attached :exp_image
+  self.inheritance_column = :_type_disabled
+  enum type: { volunteer: 'ボランティア', event: 'イベント', other: 'その他' }
+  
+  
   
   validates :title, presence: true
   validates :content, presence: true, length: {minimum: 50}
   
+  has_one_attached :exp_image
   
   def get_exp_image(width, height)
     unless exp_image.attached?
@@ -15,6 +20,9 @@ class Expression < ApplicationRecord
     exp_image.variant(resize_to_limit: [width, height]).processed
   end
   
+  def favorited_by?(user)
+    favorites.exists?(user_id: user.id)
+  end
   
   
 end

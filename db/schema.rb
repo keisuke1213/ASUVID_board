@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_03_14_035239) do
+ActiveRecord::Schema.define(version: 2024_04_16_144457) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -42,10 +42,18 @@ ActiveRecord::Schema.define(version: 2024_03_14_035239) do
 
   create_table "expressions", force: :cascade do |t|
     t.string "title"
+    t.string "type"
     t.text "content"
     t.text "message"
     t.integer "post_id"
     t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "expression_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -76,6 +84,11 @@ ActiveRecord::Schema.define(version: 2024_03_14_035239) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string "name"
+    t.integer "grade"
+    t.string "course"
+    t.string "line_name"
+    t.string "group"
+    t.string "section"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
