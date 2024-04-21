@@ -10,7 +10,8 @@ class User < ApplicationRecord
   validates :profile_image, presence: true
   validates :grade, presence: true
   validates :course, presence: true
-  validates :group, presence: true
+  validates :segment, presence: true
+  validates :hobby, presence: true
   validates :line_name, presence: true
   
   devise :database_authenticatable, :registerable,
@@ -19,11 +20,11 @@ class User < ApplicationRecord
   has_one_attached :profile_image
   
   def get_profile_image(width, height)
-    unless profile.image.attached?
+    unless profile_image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
       profile.image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
     end
-    profile.image.variant(resize_to_limit: [width, height]).processed
+    profile_image.variant(resize_to_limit: [width, height]).processed
   end
   
 end

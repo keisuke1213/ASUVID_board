@@ -1,10 +1,14 @@
 Rails.application.routes.draw do
+  get 'users/index'
+  get 'users/show'
+  get 'users/edit'
   get 'carenders/top'
   get 'homes/top'
   devise_scope :user do
     root :to => "devise/sessions#new"
   end
   devise_for :users
+  resources :users
   resources :posts
   resources :expressions do
     resource :favorites,only: [:create, :destroy]

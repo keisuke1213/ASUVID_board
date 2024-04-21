@@ -8,12 +8,13 @@ class PostsController < ApplicationController
   
   def create
     @post = Post.new(post_params)
+    @post.clear_start_time_if_date_undecided 
     @post.user_id = current_user.id
     if @post.save
       flash[:notice] = "登録に成功しました。"
       redirect_to posts_path
     else 
-      render :new, status: :unprocessable_entity
+      render :new 
     end
   end
 

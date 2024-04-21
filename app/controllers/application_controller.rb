@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
  before_action :configure_permitted_parameters, if: :devise_controller?
-
+ before_action :authenticate_user!
 
   def after_sign_in_path_for(resource)
     posts_path
@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name,:grade, :course,:line_name, :group,:section,:profile_image,:email])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name,:grade, :course,:line_name, :segment, :hobby, :section,:profile_image,:email])
   end
   
 end

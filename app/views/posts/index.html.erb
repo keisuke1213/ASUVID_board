@@ -1,4 +1,7 @@
-<div class="mt-3 text-center">
+
+<div class="container">
+  <div class="mt-3 text-center">
+    <h6 class="mt-3 text-center">掲示板</h6>
   <%= form_tag(posts_path, method: "get") do %>
   <%= text_field_tag :search, params[:search], id: "search-box", placeholder: "キーワードを入力" %>
   <%= submit_tag "検索",id: "search-form" %>
@@ -7,18 +10,15 @@
 
 
 
-<div class="my-3 text-center">
+<div class="my-3 d-block mx-auto text-center" style="width: 75%;">
   <%= link_to "ボランティア", "#",class: "search-link btn btn-success mb-2 mx-2" %>
   <%= link_to "イベント", "#",class: "search-link btn btn-danger mb-2 mx-2" %>
   <%= link_to "お知らせ", "#",class: "search-link btn btn-info mb-2 me-2 mx-2" %>
   <%= link_to "清掃", "#",class: "search-link btn btn-warning mb-2 mx-2" %>
 </div>
-
-
-<div class="container">
   <% @posts.each do |post| %>
   <%= link_to post_path(post.id) do %>
-  <div class="row mt-4 mb-3 justify-content-center">
+  <div class="row mt-4 mb-3 justify-content-center pb-3">
       <div class="col-lg-3 text-center">
         <%= image_tag post.get_image(250,200) %>
       </div>

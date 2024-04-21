@@ -35,8 +35,9 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       t.integer :grade
       t.string :course
       t.string :line_name
-      t.string :group
+      t.string :segment
       t.string :section
+      t.string :hobby
       
 
       t.timestamps null: false

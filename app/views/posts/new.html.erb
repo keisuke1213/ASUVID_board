@@ -1,18 +1,11 @@
 <div class="container">
   <div class="row justify-content-center pb-4">
-  <% if @new_post.errors.any? %>
-      <%= @new_post.errors.count %> error prohibited this book from being saved:
-      <ul>
-      <% @new_post.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    <% end %>
     <div class="col-9 mx-3 mt-3 ">
-        <h5>投稿フォーム</h5>
+        <h5 class="mb-0">投稿フォーム</h5>
         <%= form_with model: @new_post do |f| %>
+        　 <p class="mb-1"><%= f.label :type, "投稿内容のカテゴリを選択してください" %></p>
            <%= f.select :type, options_for_select({ ボランティア: 'ボランティア', イベント: 'イベント', お知らせ: 'お知らせ' }),class: 'form-control' %>
-            <h6 class="mt-2">画像を選択</h6>
+            <h6 class="mt-3">画像を選択</h6>
             <%= f.file_field :image, placeholder: "画像", accept: "image/*" %>
             <h6 class="pt-2">タイトル</h6>
             <%= f.text_field :title,class: 'form-control' %>
@@ -29,13 +22,16 @@
               <%= f.text_field :approximate_date, placeholder: "2024年内、来週、3月中旬など", class: 'form-control' %>
             </div>
             <h6 class="mt-2">活動場所</h6>
-            <%= f.text_field :place,class: 'form-control' %>
+            <%= f.text_field :place, placeholder: "決まっていない場合は未定と記入",class: 'form-control' %>
             <h6 class="pt-2">内容</h6>
-            <%= f.text_area :content,class: 'form-control'%>
+            <%= f.text_area :content, placeholder: "なるべく具体的に書きましょう！",class: 'form-control'%>
             <h6 class="mt-2">締め切り</h6>
             <%= f.date_select :deadline %>
             <h6 class="mt-2">募集人数</h6>
-            <%= f.text_field :number,class: 'form-control' %>
+            <div class="d-flex">
+              <%= f.text_field :number,class: 'form-control' ,style: "width: 100px" %>
+              <h6 class="px-2 pt-2">人程度</h6>
+            </div>
             <h6 class="mt-2">持ち物</h6>
             <%= f.text_field :belongings,class: 'form-control' %>
             <h6 class="mt-2">URL</h6>

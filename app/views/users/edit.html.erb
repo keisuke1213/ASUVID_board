@@ -1,0 +1,25 @@
+<div class="container">
+  <di class="row pb-3 justify-content-center">
+    <div class="col-9">
+      <h5 class="mt-4">プロフィール編集フォーム</h5>
+      <%= form_with model: @user do |f|%>
+        <%= f.file_field :profile_image, placeholder: "画像", accept: "image/*",class: "mt-3" %><br>
+        <%= f.label :name,"名前",class: "mt-3"  %><br>
+        <%= f.text_field :name, autofocus: true,class: 'form-control'  %>
+        <%= f.label :grade, "学年" ,class: "mt-3" %><br>
+         <%= f.text_field :grade,class: 'form-control' %>
+         <%= f.label :course, "学部",class: "mt-3" %><br>
+       <%= f.text_field :course,class: 'form-control' %>
+        <%= f.label :line_name, "LINE名",class: "mt-3" %><br>
+       <%= f.text_field :line_name,class: 'form-control' %>
+       <%= f.label :segment,"所属G" ,class: "mt-3"%><br>
+       <%= f.text_field :segment,class: 'form-control' %>
+       <%= f.label :section, "所属セクション" ,class: "mt-3"%><br>
+       <%= f.text_field :section,class: 'form-control' %>
+       <%= f.submit '編集', class: "btn btn-success mb-2 mt-3 mx-auto"%>
+        <%= f.label :hobby,"趣味",class: "mt-3" %><br>
+       <%= f.text_field :hobby,class: 'form-control' %>
+      <% end %>
+    </div>
+  </di>
+</div>

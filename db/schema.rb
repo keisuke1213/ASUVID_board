@@ -87,8 +87,9 @@ ActiveRecord::Schema.define(version: 2024_04_16_144457) do
     t.integer "grade"
     t.string "course"
     t.string "line_name"
-    t.string "group"
+    t.string "segment"
     t.string "section"
+    t.string "hobby"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true

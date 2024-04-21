@@ -1,0 +1,53 @@
+<div class="d-flex mx-auto mt-5 pt-3 justify-content-between" style="width: 350px">
+  <div class="">
+    <%= image_tag @user.get_profile_image(180,150) %>
+  </div>
+  <div class="mx-auto px-2">
+    <p class="mb-0"  style="font-size: 15px"><%= @user.name %></p>
+    <div class="d-flex">
+     <p class="mb-0" style="font-size: 15px"><%= @user.grade %>年</p>
+     <p class="mb-0 px-3" style="font-size: 15px"><%= @user.course %></p>
+    </div>
+     <p class="mb-0"><%= @user.segment %>G</p>
+     <p class="mb-0"><%= @user.section %>セクション</p>
+     <div class="d-flex">
+           <p>趣味</p>
+           <p class="mb-0 text-dark"><%= user.hobby %></p>
+         </div>
+     <div class="d-flex">
+       <p>LINE</p>
+       <p class="px-3">
+         <%= @user.line_name  %>
+        </p>
+     </div>
+  </div>
+</div>
+
+<p class="text-center mt-5">記録した体験記</p>
+
+<% @exps.each do |exp| %>
+<%= link_to expression_path(exp.id) do %>
+  <div class="row mt-4 mb-3 pb-3 justify-content-center">
+    <div class="col-lg-2 text-center">
+        <%= image_tag exp.get_exp_image(180,100) %>
+    </div>
+    <div class="col-lg-3">
+      <h4 class="mb-3 text-center pt-3"><%= exp.title %></h4>
+       <p class="mx-auto text-body" style="width: 70%;"><%= exp.content.truncate(32) %></p>
+       <div class="mx-auto mt-2 d-flex justify-content-between" style="width: 50%">
+       <p class="pe-3" style="color: #DAA520; font-size: 20px"><%= exp.user.name %></p>
+       <% if exp.favorited_by?(current_user) %>
+        <%= link_to expression_favorites_path(exp), method: :delete, class: "align-middle" do %>
+           <i class="fa-solid fa-heart"></i><%= exp.favorites.count %>いいね
+        <% end %>
+        <% else %>
+        <%= link_to expression_favorites_path(exp), method: :post, class: "align-middle" do %>
+           <i class="fa-solid fa-heart"></i><%= exp.favorites.count %>いいね
+        <% end %>
+      <% end %>
+      </div>
+        <p class="text-right mb-0"style="color: #808080; width: 80%;"><%= l exp.created_at %></p>
+    </div>
+  </div>
+  <% end %>
+  <% end %>
