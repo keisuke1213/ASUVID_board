@@ -1,0 +1,22 @@
+databases:
+  - name: app_for_ASUVID_DB
+    databaseName: app_for_asuvid_db
+    user: app_for_ASUVID
+    region: singapore
+
+services:
+  - type: web
+    name: app_for_ASUVID
+    env: ruby
+    region: singapore
+    plan: free
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: app_for_ASUVID_DB
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
+
