@@ -4,20 +4,20 @@
     <h3 class="pb-3 pt-3"><%= @post.title %></h3>
     <%= image_tag @post.get_image(350,250)%>
     <div class="d-flex  mt-4 justify-content-center">
-      <h5 class="">日時</h6>
+      <h5 class="">日時:</h6>
       <h5 class="mx-3"><p><%= @post.date_decided ? l(@post.start_time) : @post.approximate_date %></p><h6>
     </div>
     <div class="d-flex mb-2  pb-2 justify-content-center">
-      <h5 class="">募集期限</h6>
+      <h5 class="">募集期限:</h6>
       <h5 class="mx-3"><%= l @post.deadline, format: :short %></h6>
     </div>
      </div>
    <div class="col-lg-5 bg-white pt-3 pb-3">
         <div class="d-flex mb-2 justify-content-center">
-          <h5 class="">活動場所</h5>
-          <h5 class="mx-3"><%= @post.place %></p>
+          <h5 class="">活動場所:</h5>
+          <h5 class="mx-3"><%= @post.place %></h5>
         </div>
-          <h5 class="pt-2 pb-3 text-center">活動内容</h5>
+          <h5 class="pt-3 pb-3 text-center">活動内容</h5>
           <p class="mx-auto text-body" style="width: 70%"><%= @post.content %></p>
        <div class="d-flex pt-4 mt-3 justify-content-center">
           <h6>募集人数:</h6>
@@ -28,10 +28,10 @@
           <p class="mx-3 text-center"><%= @post.belongings %></hp>
        </div>
        
-          <h5 class="pt-3 text-center">応募はこちらから</h5>
+          <h5 class="pt-3 pb-3  text-center">応募はこちらから</h5>
          <%= link_to @post.URL,  @post.URL, class: "text-break d-block mx-5 px-2"%>
          
-        <div class="text-center mt-3 pt-2">
+        <div class="text-center mt-3 pt-3">
         <%= link_to "体験記を探す",expressions_path, class: "btn btn-info" %>
         <%= link_to "編集", edit_post_path, class: "btn btn-success" %>
         <%= link_to "削除", post_path(@post.id), method: :delete, "data-confirm" => "削除しても大丈夫ですか？", class: "btn btn btn-danger " %>

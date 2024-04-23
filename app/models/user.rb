@@ -11,8 +11,9 @@ class User < ApplicationRecord
   validates :grade, presence: true
   validates :course, presence: true
   validates :segment, presence: true
-  validates :hobby, presence: true
+  validates :college, presence: true
   validates :line_name, presence: true
+  validates :furigana,presence: true
   
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable

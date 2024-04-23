@@ -38,6 +38,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       t.string :segment
       t.string :section
       t.string :hobby
+      t.string :college
+      t.string :furigana
       
 
       t.timestamps null: false

@@ -1,25 +1,18 @@
 <div class="container">
-    <% if @exp.errors.any? %>
-      <%= @exp.errors.count %> error prohibited this book from being saved:
-      <ul>
-      <% @exp.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    <% end %>
     <div class="row justify-content-center">
         <div class="col-9">
             <h5 class="mt-4">体験記投稿フォーム</h5>
             <%= form_with model: @exp do |f| %>
+            <p class="mb-1 mt-3"><%= f.label :type, "投稿内容のカテゴリを選択してください" %></p>
             <%= f.select :type, options_for_select({ ボランティア: 'ボランティア', イベント: 'イベント', その他: 'その他' }),class: 'form-control' %>
-        　　<h6>画像を選択</h6>
+        　　<h6 class="mt-3">画像を選択</h6>
             <%= f.file_field :exp_image, placeholder: "画像", accept: "image/*" %>
             
             <h4 class="mt-3">活動名</h4>
             <%= f.text_field :title,class: 'form-control' %>
         
             <h4 class="mt-3">体験記</h4>
-            <%= f.text_area :content, placeholder: "活動内容、感じたこと、学び、これからどうしたいか、今後の参加者へのメッセージなど",class: 'form-control' %>
+            <%= f.text_area :content, placeholder: "活動内容、感じたこと、学び、これからどうしたいか、今後の参加者へのメッセージなどなどなど、",class: 'form-control' %>
             <%= f.submit '登録',class: "btn btn-success mt-3" %>
           <% end %>
 

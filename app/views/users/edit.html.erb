@@ -4,21 +4,23 @@
       <h5 class="mt-4">プロフィール編集フォーム</h5>
       <%= form_with model: @user do |f|%>
         <%= f.file_field :profile_image, placeholder: "画像", accept: "image/*",class: "mt-3" %><br>
+        <%= f.label :furigana,"ふりがな",class: "mt-3"  %><br>
+        <%= f.text_field :furigana,class: 'form-control'  %>
         <%= f.label :name,"名前",class: "mt-3"  %><br>
-        <%= f.text_field :name, autofocus: true,class: 'form-control'  %>
-        <%= f.label :grade, "学年" ,class: "mt-3" %><br>
-         <%= f.text_field :grade,class: 'form-control' %>
+        <%= f.text_field :name, autofocus: true,class: 'form-control'  %><br>
+        <%= f.label :college,"大学",class: "mt-3" %><br>
+        <%= f.text_field :college,value: "大学",class: 'form-control' %>
+        <%= f.label :grade,"学年",class: "mt-3" %><br>
+        <%= f.select :grade, (1..4).map { |n| [n, n] }, { prompt: "選択してください" }, class: "form-control" %>
          <%= f.label :course, "学部",class: "mt-3" %><br>
        <%= f.text_field :course,class: 'form-control' %>
         <%= f.label :line_name, "LINE名",class: "mt-3" %><br>
        <%= f.text_field :line_name,class: 'form-control' %>
        <%= f.label :segment,"所属G" ,class: "mt-3"%><br>
-       <%= f.text_field :segment,class: 'form-control' %>
+       <%= f.select :segment, options_for_select(["ふみG", "かのG", "みつこG", "よしかG", "みずきG", "ともやG", "あやねG", "いくみんG", "のぶG","無所属"]), {}, class: 'form-control' %>
        <%= f.label :section, "所属セクション" ,class: "mt-3"%><br>
-       <%= f.text_field :section,class: 'form-control' %>
+       <%= f.select :section, options_for_select(["","地域活性化", "消費生活こども", "減災防災", "国際協力", "ほっこりはあと出町", "迦陵園", "西陣児童館", "京都こどもクッキング", "ママキラ", "環境保護"]), {}, class: 'form-control' %>
        <%= f.submit '編集', class: "btn btn-success mb-2 mt-3 mx-auto"%>
-        <%= f.label :hobby,"趣味",class: "mt-3" %><br>
-       <%= f.text_field :hobby,class: 'form-control' %>
       <% end %>
     </div>
   </di>

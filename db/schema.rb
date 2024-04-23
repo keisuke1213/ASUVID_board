@@ -40,6 +40,17 @@ ActiveRecord::Schema.define(version: 2024_04_16_144457) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.text "comment"
+    t.integer "user_id"
+    t.string "commentable_type"
+    t.integer "commentable_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
+  end
+
   create_table "expressions", force: :cascade do |t|
     t.string "title"
     t.string "type"
@@ -53,6 +64,15 @@ ActiveRecord::Schema.define(version: 2024_04_16_144457) do
 
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id"
+    t.integer "expression_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "post_comments", force: :cascade do |t|
+    t.text "comment"
+    t.integer "user_id"
+    t.integer "post_id"
     t.integer "expression_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -90,6 +110,8 @@ ActiveRecord::Schema.define(version: 2024_04_16_144457) do
     t.string "segment"
     t.string "section"
     t.string "hobby"
+    t.string "college"
+    t.string "furigana"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true

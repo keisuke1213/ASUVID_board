@@ -10,13 +10,24 @@
   <%= f.file_field :profile_image, placeholder: "画像", accept: "image/*" %>
   
   <div class="field">
-   <%= f.label :name,"名前",class: "mt-3" %><br>
+   <%= f.label :furigana,"名前(ひらがな）",class: "mt-3" %><br>
+   <%= f.text_field :furigana, autofocus: true,class: 'form-control'  %>
+  </div>
+  
+  <div class="field">
+   <%= f.label :name,"名前(漢字)",class: "mt-3" %><br>
    <%= f.text_field :name, autofocus: true,class: 'form-control'  %>
   </div>
   
   <div class="field">
    <%= f.label :grade,"学年",class: "mt-3" %><br>
-   <%= f.text_field :grade,class: 'form-control' %>
+   <%= f.select :grade, (1..4).map { |n| [n, n] }, { prompt: "選択してください" }, class: "form-control" %>
+
+  </div>
+  
+  <div class="field">
+   <%= f.label :college,"大学",class: "mt-3" %><br>
+   <%= f.text_field :college,value: "大学",class: 'form-control' %>
   </div>
   
   <div class="field">
@@ -30,23 +41,20 @@
   </div>
   
   <div class="field">
-   <%= f.label :segment,"所属G",class: "mt-3" %><br>
+   <%= f.label :segment, "所属G",class: "mt-3" %><br>
    <div class="d-flex">
-    <%= f.text_field :segment ,class: 'form-control', style: "width: 100px;" %>
-    <h5 class="px-2 pt-2">G</h5>
+    <%= f.select :segment, options_for_select(["ふみG", "かのG", "みつこG", "よしかG", "みずきG", "ともやG", "あやねG", "いくみんG", "のぶG","無所属"]), {}, class: 'form-control' %>
+    <h5 class="px-2 pt-2"></h5>
    </div>
    
   </div>
   
   <div class="field">
    <%= f.label :section,"セクション",class: "mt-3" %><br>
-   <%= f.text_field :section,class: 'form-control' %>
+   <%= f.select :section, options_for_select(["","地域活性化", "消費生活こども", "減災防災", "国際協力", "ほっこりはあと出町", "迦陵園", "西陣児童館", "京都こどもクッキング", "ママキラ", "環境保護"]), {}, class: 'form-control' %>
+
   </div>
   
-  <div class="field">
-   <%= f.label :hobby,"趣味",class: "mt-3" %><br>
-   <%= f.text_field :hobby,class: 'form-control' %>
-  </div>
   
   <div class="field">
    <%= f.label :email,"メールアドレス",class: "mt-3" %><br>

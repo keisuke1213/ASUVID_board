@@ -1,2 +1,16 @@
 @use '~bootstrap/scss/bootstrap';
 
+.test {
+  height: 120px;
+}
+
+.font-size {
+  font-size: 10px;
+}
+
+
+// カレンダーの設定
+
+.calendar-table tr td:hover {
+  background-color: #FFFF8c;    
+}

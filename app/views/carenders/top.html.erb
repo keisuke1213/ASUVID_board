@@ -1,11 +1,11 @@
-<div class="col-10 py-5 mx-auto">
+<div class="col-sm-12 col-md-9 py-5 mx-auto">
      <%= month_calendar(events: @posts) do |date, posts| %>
         <%= date.day %>
         <% posts.each do |post| %>
-        <div class="text-center pb-3" style="width: 100%">
+        <div class="" style="width: 100%">
           <%= link_to post_path(post.id) do %>
-          <p class="text-dark mb-0"><%= post.title.truncate(7) %></p>
-          <p class="text-danger mb-0"><%= l post.deadline, format: :short %></p>
+          <p class="text-dark mb-0 font-size"><%= post.title.truncate(7) %></p>
+          <p class="text-danger mb-0 font-size px-2"><%= l post.deadline, format: :short %></p>
           <% end %>
         </div>
       <% end %>

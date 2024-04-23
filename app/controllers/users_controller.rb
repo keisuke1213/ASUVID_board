@@ -3,8 +3,8 @@ class UsersController < ApplicationController
   
   def index
     if params[:search]
-      @users = User.where("name LIKE ? OR grade LIKE ? or line_name LIKE ? or segment LIKE ? or section LIKE ?",
-      "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%")
+      @users = User.where("name LIKE ? OR grade LIKE ? or line_name LIKE ? or segment = ? or section = ? or college LIKE ? or furigana LIKE ?",
+      "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%", params[:search], params[:search], "%#{params[:search]}%", "%#{params[:search]}%")
     else
       @users = User.all.page(params[:page]).order(grade: :desc)
     end
@@ -12,7 +12,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @exps = @user.expressions.page(params[:page])
+    @exps = @user.expressions.page(params[:page]).order(created_at: :desc)
   end
 
   def edit
@@ -23,21 +23,27 @@ class UsersController < ApplicationController
   def update
     is_matching_login_user
     @user = User.find(params[:id])
-    @user.update(user_params)
-    redirect_to users_path
+    if @user.update(user_params)
+    redirect_to user_path(@user.id)
+    else
+    render edit_user_path(@user.id)
+    end
   end
   
   def destroy
     is_matching_login_user
     user = User.find(params[:id])
-    user.destroy
+    if user.destroy
     redirect_to users_path
+    else
+    render users_path
+    end
   end
   
   private 
   
   def user_params
-    params.require(:user).permit(:name, :grade, :line_name, :segment, :sectio,:hobby)
+    params.require(:user).permit(:name, :grade, :line_name, :segment, :section,:college,:furigana)
   end
   
   def is_matching_login_user
