@@ -1,6 +1,6 @@
 const { environment } = require('@rails/webpacker')
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin')
 
-module.exports = environment
 
 const webpack = require('webpack')
 environment.plugins.prepend(
@@ -11,3 +11,10 @@ environment.plugins.prepend(
     Popper: 'popper.js'
   })
 )
+environment.plugins.append('Manifest', new WebpackManifestPlugin({
+  fileName: 'manifest.json',
+  publicPath: '/packs/',
+  writeToFileEmit: true,
+}));
+
+module.exports = environment
